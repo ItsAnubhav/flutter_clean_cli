@@ -62,11 +62,13 @@ class CreateFeature extends Command {
     RepoSample(featureName).create();
     UseCaseSample(featureName).create();
     EntitySample(featureName).create();
-    BlocSample(featureName).create();
-    EventSample(featureName).create();
-    StateSample(featureName).create();
-    PageSample(featureName).create();
+    BlocSample(featureName, featureName).create();
+    EventSample(featureName, featureName).create();
+    StateSample(featureName, featureName).create();
+    PageSample(featureName, featureName).create();
     //add dependencies to di
+    final dependency = CleanUtils.getFeatureDependencies(featureName);
+    CleanUtils.addDependencyToGetIt(featureName, dependency);
     //add page route to routes file
   }
 

@@ -19,6 +19,7 @@ class TestFeature extends Command {
     final dependency = CleanUtils.getFeatureDependencies(featureName);
     CleanUtils.addDependencyToGetIt(featureName, dependency);
     //Add screen to route
+
     return Future.value(null);
   }
 

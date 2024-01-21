@@ -29,6 +29,8 @@ class CreateScreen extends Command {
     //Get all arguments
     final arguments = CleanApp.arguments;
     final featureName = arguments.last;
+    final screenName = arguments[1];
+    Logger.info("Creating screen $screenName in feature $featureName");
     //Check if the project is clean arch
     bool isCleanArch = CleanUtils.checkIfCleanArchProject();
     //Check if dependencies is installed
@@ -36,38 +38,22 @@ class CreateScreen extends Command {
     //Check if the feature already exists
     bool doesFeatureExist = CleanUtils.checkIfFeatureExists(featureName);
     if (!doesFeatureExist) {
-      Menu featureExists =
-          Menu(["Yes", "No"], title: "Feature does not exists.");
-      Answer answer = featureExists.choose();
-      if (answer.index == 0) {
-        //Overwrite the feature
-      } else {
-        //Do not overwrite the feature
-        return Future.value(null);
-      }
+      Logger.error("Feature $featureName does not exist");
+      return Future.value(null);
     }
-
     //Create the feature
+    createScreen(featureName, screenName);
     //createFeature(featureName);
     return Future.value(null);
   }
 
-  FutureOr<void> createFeature(String featureName) {
+  FutureOr<void> createScreen(String featureName, String screenName) {
     Logger.info("Creating directories and files for $featureName");
     //create all files
-    LocalDataSourceSample(featureName).create();
-    RemoteDataSourceSample(featureName).create();
-    RepoImplSample(featureName).create();
-    ModelSample(featureName).create();
-    RepoSample(featureName).create();
-    UseCaseSample(featureName).create();
-    EntitySample(featureName).create();
-    BlocSample(featureName).create();
-    EventSample(featureName).create();
-    StateSample(featureName).create();
-    PageSample(featureName).create();
-    //add dependencies to di
-    //add page route to routes file
+    BlocSample(featureName, screenName).create();
+    EventSample(featureName, screenName).create();
+    StateSample(featureName, screenName).create();
+    PageSample(featureName, screenName).create();
   }
 
   @override

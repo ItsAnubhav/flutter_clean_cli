@@ -62,7 +62,7 @@ class CleanUtils {
   }
 
   static String getFeatureDependencies(String featureName) {
-    final featureNameSnakeCase = ReCase(featureName).snakeCase;
+    //final featureNameSnakeCase = ReCase(featureName).snakeCase;
     return """
     // ${ReCase(featureName).pascalCase} Feature
     getIt.registerLazySingleton<${ReCase(featureName).pascalCase}LocalDataSource>(() =>
@@ -72,6 +72,19 @@ class CleanUtils {
         () => ${ReCase(featureName).pascalCase}RemoteDataSourceImpl(dio: getIt()));
     getIt.registerLazySingleton<${ReCase(featureName).pascalCase}Repository>(() => ${ReCase(featureName).pascalCase}RepositoryImpl(
         ${ReCase(featureName).camelCase}LocalDataSource: getIt(), ${ReCase(featureName).camelCase}RemoteDataSource: getIt()));
+    """;
+  }
+
+  static String getScreenRoutes(String featureName, String screenName) {
+    return """
+    case ${ReCase(featureName).pascalCase}Routes.$screenName:
+      return GoRouter(
+        name: ${ReCase(featureName).pascalCase}Routes.$screenName,
+        path: '/${ReCase(featureName).snakeCase}/$screenName',
+        pageBuilder: (context, state) {
+          return ${ReCase(featureName).pascalCase}${ReCase(screenName).pascalCase}Page();
+        },
+      );
     """;
   }
 }

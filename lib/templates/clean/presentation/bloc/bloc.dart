@@ -3,10 +3,11 @@ import 'package:recase/recase.dart';
 
 class BlocSample extends Template {
   final String feature;
+  final String blocName;
 
-  BlocSample(this.feature)
+  BlocSample(this.feature, this.blocName)
       : super(
-            'lib/features/${ReCase(feature).snakeCase}/presentation/${ReCase(feature).snakeCase}/bloc/${ReCase(feature).snakeCase}_bloc.dart',
+            'lib/features/${ReCase(feature).snakeCase}/presentation/${ReCase(blocName).snakeCase}/bloc/${ReCase(blocName).snakeCase}_bloc.dart',
             overwrite: true);
 
   @override
@@ -14,12 +15,12 @@ class BlocSample extends Template {
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 
-part '${ReCase(feature).snakeCase}_event.dart';
-part '${ReCase(feature).snakeCase}_state.dart';
+part '${ReCase(blocName).snakeCase}_event.dart';
+part '${ReCase(blocName).snakeCase}_state.dart';
 
-class ${ReCase(feature).pascalCase}Bloc extends Bloc<${ReCase(feature).pascalCase}Event, ${ReCase(feature).pascalCase}State> {
-  ${ReCase(feature).pascalCase}Bloc() : super(const ${ReCase(feature).pascalCase}State()) {
-    on<${ReCase(feature).pascalCase}Event>((event, emit) {
+class ${ReCase(blocName).pascalCase}Bloc extends Bloc<${ReCase(blocName).pascalCase}Event, ${ReCase(blocName).pascalCase}State> {
+  ${ReCase(blocName).pascalCase}Bloc() : super(const ${ReCase(blocName).pascalCase}State()) {
+    on<${ReCase(blocName).pascalCase}Event>((event, emit) {
       // TODO: implement event handler
     });
   }

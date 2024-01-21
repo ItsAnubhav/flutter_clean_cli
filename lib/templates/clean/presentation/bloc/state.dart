@@ -3,33 +3,34 @@ import 'package:recase/recase.dart';
 
 class StateSample extends Template {
   final String feature;
+  final String screen;
 
-  StateSample(this.feature)
+  StateSample(this.feature, this.screen)
       : super(
-            'lib/features/${ReCase(feature).snakeCase}/presentation/${ReCase(feature).snakeCase}/bloc/${ReCase(feature).snakeCase}_state.dart',
+            'lib/features/${ReCase(feature).snakeCase}/presentation/${ReCase(screen).snakeCase}/bloc/${ReCase(screen).snakeCase}_state.dart',
             overwrite: true);
 
   @override
   String get content => """
-part of '${ReCase(feature).snakeCase}_bloc.dart';
+part of '${ReCase(screen).snakeCase}_bloc.dart';
 
-class ${ReCase(feature).pascalCase}State extends Equatable {
-  const ${ReCase(feature).pascalCase}State();
+sealed class ${ReCase(screen).pascalCase}State extends Equatable {
+  const ${ReCase(screen).pascalCase}State();
 
   @override
   List<Object?> get props => [];
 }
 
-class ${ReCase(feature).pascalCase}Initial extends ${ReCase(feature).pascalCase}State {
+class ${ReCase(screen).pascalCase}Initial extends ${ReCase(screen).pascalCase}State {
 }
 
-class ${ReCase(feature).pascalCase}Loading extends ${ReCase(feature).pascalCase}State {
+class ${ReCase(screen).pascalCase}Loading extends ${ReCase(screen).pascalCase}State {
 }
 
-class ${ReCase(feature).pascalCase}Loaded extends ${ReCase(feature).pascalCase}State {
+class ${ReCase(screen).pascalCase}Loaded extends ${ReCase(screen).pascalCase}State {
 }
 
-class ${ReCase(feature).pascalCase}Error extends ${ReCase(feature).pascalCase}State {
+class ${ReCase(screen).pascalCase}Error extends ${ReCase(screen).pascalCase}State {
 }
 """;
 }

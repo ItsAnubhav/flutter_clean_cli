@@ -8,6 +8,13 @@ Future<void> registerDependncies() async {
   getIt.registerLazySingleton(() => prefs);
 
   //New dependencies here
-  
-}
 
+  // Splash Feature
+  getIt.registerLazySingleton<SplashLocalDataSource>(() =>
+      SplashLocalDataSourceImpl(
+          sharedPreferences: getIt(), appDatabase: getIt()));
+  getIt.registerLazySingleton<SplashRemoteDataSource>(
+      () => SplashRemoteDataSourceImpl(dio: getIt()));
+  getIt.registerLazySingleton<SplashRepository>(() => SplashRepositoryImpl(
+      splashLocalDataSource: getIt(), splashRemoteDataSource: getIt()));
+}
